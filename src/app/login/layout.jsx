@@ -2,10 +2,8 @@ import React from "react";
 
 export default function LoginLayout({ children }) {
   return (
-    <div>
-      <h1>Navbar</h1>
+    <div className="bg-primaryBlue w-[100vw] h-[100vh] flex justify-center items-center">
       <div>{children}</div>
-      <h1>Footer</h1>
     </div>
   );
 }

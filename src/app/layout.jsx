@@ -13,6 +13,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
+        {/* Initilized the Popusp and configured it  */}
         <Toaster position="top-right" reverseOrder={false} />
         {children}
       </body>
