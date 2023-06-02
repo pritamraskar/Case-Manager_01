@@ -19,7 +19,7 @@ export default function LoginPage() {
   // USING React Query to make the code optimize
   // const submitData = useMutation({
   //   mutationFn: async (data) => {
-  //     const res = await axios.post(`https://2b25-43-225-192-26.in.ngrok.io/user/authenticate`, data);
+  //     const res = await axios.post(`https://74bd-43-225-192-26.in.ngrok.io/user/authenticate`, data);
   //     console.log("Loged Response: ", res);
   //     return res;
   //   },
@@ -32,13 +32,14 @@ export default function LoginPage() {
   const submitData = async (data) => {
 
     // USING AXIOS
-    const headers = {
-      "Access-Control-Allow-Origin": "*",
-      "Content-Type": "application/json",
-    };
+     const headers = {
+    //   "Access-Control-Allow-Origin": "*",
+      "Content-Type": "application/json"
+      
+     };
     console.log(data);
     const res = await axios.post(
-      "https://2a0f-43-225-192-26.in.ngrok.io/user/authenticate",
+      "https://74bd-43-225-192-26.in.ngrok.io/user/authenticate",
       data,
       { headers: headers, withCredentials: true, method : 'POST' },
     );
@@ -46,7 +47,7 @@ export default function LoginPage() {
 
     // USING FETCH
     // const res = await fetch(
-    //   "https://c2e8-43-225-192-26.in.ngrok.io/user/authenticate",
+    //   "https://74bd-43-225-192-26.in.ngrok.io/user/authenticate",
     //   {
     //     method: "POST",
     //     withCredentials: true,
