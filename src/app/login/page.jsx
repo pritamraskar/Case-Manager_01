@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import { headers } from "../../../next.config";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -16,56 +15,62 @@ export default function LoginPage() {
     formState: { errors },
   } = useForm();
 
-  // USING React Query to make the code optimize
-  // const submitData = useMutation({
-  //   mutationFn: async (data) => {
-  //     const res = await axios.post(`https://2b25-43-225-192-26.in.ngrok.io/user/authenticate`, data);
-  //     console.log("Loged Response: ", res);
-  //     return res;
-  //   },
-  //   onSuccess: () => {
-  //     router.push("/dashboard");
-  //     toast.success("Logged in successfully");
-  //   },
-  // });
-
-  const submitData = async (data) => {
-
-    // USING AXIOS
-    const headers = {
-      "Access-Control-Allow-Origin": "*",
-      "Content-Type": "application/json",
-    };
-    console.log(data);
-    const res = await axios.post(
-      "https://2a0f-43-225-192-26.in.ngrok.io/user/authenticate",
-      data,
-      { headers: headers, withCredentials: true, method : 'POST' },
-    );
-    console.log("Response", res);
-
-    // USING FETCH
-    // const res = await fetch(
-    //   "https://c2e8-43-225-192-26.in.ngrok.io/user/authenticate",
-    //   {
-    //     method: "POST",
-    //     withCredentials: true,
-    //     crossorigin: true,
-    //     mode: "no-cors",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       "Access-Control-Allow-Origin": "*",
-    //     },
-    //     body: JSON.stringify(data),
-    //   }
-    // );
-
-    // console.log(res);
+  // USING AXIOS request
+  const submitDataAxios = async (data) => {
+  const headers = {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json",
   };
+  console.log(data);
+  const res = await axios.post(
+    "http://5594-43-225-192-26.in.ngrok.io/user/authenticate",
+    data,
+    headers
+  );
+  console.log("Response", res);
+  };
+
+  // USING FETCH request
+  const submitDataFetch = async (data) => {
+    const res = await fetch(
+      "https://5594-43-225-192-26.in.ngrok.io/user/authenticate",
+      {
+        method: "POST",
+        withCredentials: true,
+        crossorigin: true,
+        // mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify(data),
+      }
+    );
+    console.log(res);
+  }
+
+  // USING React Query to make the code optimize
+  const submitData = useMutation({
+    mutationFn: async (data) => {
+      const res = await axios.post(
+        `https://5594-43-225-192-26.in.ngrok.io/user/authenticate`,
+        data
+      );
+      console.log("Loged Response: ", res);
+      return res;
+    },
+    onSuccess: () => {
+      router.push("/dashboard");
+      toast.success("Logged in successfully");
+    },
+  });
 
   return (
     <main className="bg-white px-12 py-[70px] rounded-lg w-[550px]">
-      <form onSubmit={handleSubmit(submitData)} className="flex flex-col gap-5">
+      <form
+        onSubmit={handleSubmit(submitDataFetch)}
+        className="flex flex-col gap-5"
+      >
         <input
           type="text"
           name="username"
