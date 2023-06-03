@@ -17,43 +17,40 @@ export default function LoginPage() {
 
   // USING AXIOS request
   const submitDataAxios = async (data) => {
-  const headers = {
-    "Access-Control-Allow-Origin": "*",
-    "Content-Type": "application/json",
-  };
-  console.log(data);
-  const res = await axios.post(
-    "http://5594-43-225-192-26.in.ngrok.io/user/authenticate",
-    data,
-    headers
-  );
-  console.log("Response", res);
+    const headers = {
+      "Access-Control-Allow-Origin": "*",
+      "Content-Type": "application/json",
+    };
+    console.log(data);
+    const res = await axios.post(
+      "https://dd5a-96-58-214-58.ngrok-free.app/login",
+      data,
+      headers
+    );
+    console.log("Response", res);
   };
 
   // USING FETCH request
   const submitDataFetch = async (data) => {
-    const res = await fetch(
-      "https://5594-43-225-192-26.in.ngrok.io/user/authenticate",
-      {
-        method: "POST",
-        withCredentials: true,
-        crossorigin: true,
-        // mode: "no-cors",
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-        },
-        body: JSON.stringify(data),
-      }
-    );
+    const res = await fetch("https://dd5a-96-58-214-58.ngrok-free.app/login", {
+      method: "POST",
+      withCredentials: true,
+      crossorigin: true,
+      // mode: "no-cors",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify(data),
+    });
     console.log(res);
-  }
+  };
 
   // USING React Query to make the code optimize
   const submitData = useMutation({
     mutationFn: async (data) => {
       const res = await axios.post(
-        `https://5594-43-225-192-26.in.ngrok.io/user/authenticate`,
+        `https://dd5a-96-58-214-58.ngrok-free.app/login`,
         data
       );
       console.log("Loged Response: ", res);
